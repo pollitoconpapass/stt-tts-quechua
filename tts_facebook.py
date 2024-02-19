@@ -8,7 +8,7 @@ import os
 def tts(text, region):
     # === DIFFERENT MODELS ===
     default="facebook/mms-tts-quz"  
-    hg_models = {
+    hg_models = {  # -> different quechua variations
         "san-martin": "facebook/mms-tts-qvs",
         "cuzco": "facebook/mms-tts-quz",
         "huallaga": "facebook/mms-tts-qub",
