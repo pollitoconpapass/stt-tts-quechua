@@ -21,7 +21,7 @@
 Text-to-Speech:
 - Here it will be a bit more simple
 - Go to Body -> raw -> JSON
-- Requested values: `text` and `region` (both strings)
+- Requested values: `text`, `region`, and `audio-name` (optional)
 - Check the supported regions on the master's README
 
   ![image](https://github.com/pollitoconpapass/stt-tts-quechua/assets/90667035/6f2e174c-0d3b-4503-8755-50725a0140fa)
