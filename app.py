@@ -77,8 +77,9 @@ async def stt(wav_file: UploadFile = File(...)):
     processor = AutoProcessor.from_pretrained(model_id)
     model = Wav2Vec2ForCTC.from_pretrained(model_id)
 
-    audio_data, sampling_rate = torchaudio.load(io.BytesIO(await wav_file.read()))
-    inputs = processor(audio_data.numpy(), sampling_rate=sampling_rate, return_tensors="pt")
+    audio_data, original_sampling_rate = torchaudio.load(io.BytesIO(await wav_file.read()))
+    resampled_audio_data = torchaudio.transforms.Resample(original_sampling_rate, 16000)(audio_data)
+    inputs = processor(resampled_audio_data.numpy(), sampling_rate=16000, return_tensors="pt")
 
     with torch.no_grad():
         outputs = model(**inputs).logits
