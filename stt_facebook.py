@@ -1,6 +1,7 @@
 from transformers import Wav2Vec2ForCTC, AutoProcessor
 import torchaudio
 import torch
+import io
 
 
 def stt(wave_file_path):  
@@ -8,7 +9,7 @@ def stt(wave_file_path):
     processor = AutoProcessor.from_pretrained(model_id)
     model = Wav2Vec2ForCTC.from_pretrained(model_id)
 
-    audio_data, original_sampling_rate = torchaudio.load(io.BytesIO(await wav_file.read()))
+    audio_data, original_sampling_rate = torchaudio.load(io.BytesIO(wav_file_path.read()))
     resampled_audio_data = torchaudio.transforms.Resample(original_sampling_rate, 16000)(audio_data)
     inputs = processor(resampled_audio_data.numpy(), sampling_rate=16000, return_tensors="pt")
 
